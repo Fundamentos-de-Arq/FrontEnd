@@ -127,8 +127,8 @@
       </v-card>
     </v-dialog>
 
-    <v-responsive :aspect-ratio="16/9">
-      <v-container class="myPublications">
+    <v-responsive >
+      <v-container >
         <v-row>
           <v-col cols="9">
             <v-text-field label="Search..."
@@ -150,8 +150,8 @@
             </v-btn>
           </v-col>
         </v-row>
-        <v-row>
 
+        <v-row>
           <v-col
               v-for="publication in publications"
               :key="publication.id"

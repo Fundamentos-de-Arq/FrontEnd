@@ -76,7 +76,7 @@
                 readonly :value=this.password>
             </v-text-field>
           </v-col>
-          <v-card-actions  v-if="this.storageUser===this.tempUser" >
+          <v-card-actions  v-show="this.storageUser===this.tempUser" >
             <v-btn style="color:white; background-color: #FFC107" @click="onEdit">
               Edit Information
             </v-btn>
@@ -90,85 +90,6 @@
 
   </template>
 
-<!--      <v-card  max-width="1200"-->
-<!--      >-->
-
-<!--        <v-img-->
-<!--            :src=this.urlToImageBackground-->
-<!--            class="white&#45;&#45;text align-end"-->
-<!--            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"-->
-<!--            max-height="400px"-->
-<!--            alt="background image of profile"-->
-<!--        >-->
-<!--            <v-avatar style="border-radius:0" size="150">-->
-<!--              <img-->
-<!--                  alt="image of user profile"-->
-<!--                  v-bind:src="this.urlToImageProfile"-->
-<!--              >-->
-<!--            </v-avatar>-->
-
-<!--            <v-card-subtitle style="font-size:20px">-->
-<!--              {{this.name}} {{this.lastName}}-->
-<!--              <br/>-->
-<!--              <a style="font-size:16px; color: darkgray">@{{this.user}}</a>-->
-<!--            </v-card-subtitle>-->
-
-<!--        </v-img>-->
-
-<!--        <v-container>-->
-<!--          <v-row>-->
-<!--            <v-col cols="4">-->
-<!--              <v-text-field-->
-<!--                            label="Dni"-->
-<!--              readonly :value=this.dni>-->
-
-<!--              </v-text-field>-->
-<!--            </v-col>-->
-<!--            <v-col cols="4">-->
-<!--              <v-text-field-->
-<!--                  label="Phone"-->
-<!--                  readonly :value=this.phone>-->
-
-<!--              </v-text-field>-->
-<!--            </v-col>-->
-<!--            <v-col cols="4">-->
-<!--              <v-text-field-->
-<!--                  label="Type"-->
-<!--                  readonly :value=this.type>-->
-
-<!--              </v-text-field>-->
-<!--            </v-col>-->
-<!--            <v-col cols="6">-->
-<!--              <v-text-field-->
-<!--                  label="Email"-->
-<!--                  readonly :value=this.email>-->
-
-<!--              </v-text-field>-->
-<!--            </v-col>-->
-<!--            <v-col cols="6">-->
-<!--              <v-text-field-->
-<!--                  label="Password"-->
-<!--                  readonly :value=this.password>-->
-
-<!--              </v-text-field>-->
-<!--            </v-col>-->
-
-<!--          </v-row>-->
-<!--        </v-container>-->
-
-<!--         <v-card-actions  v-if="this.currentUser===0" >-->
-<!--         <v-btn style="color:white; background-color: #FFC107" @click="onEdit">-->
-<!--         Edit Information-->
-<!--         </v-btn>-->
-
-<!--        </v-card-actions>-->
-
-<!--      </v-card>-->
-
-
-  <!--Final dibujar publicaciones-->
-
-  <!--Inicio Formulario de publicacion-->
   <v-row justify="center">
     <v-dialog
         v-model="dialog"
