@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire" style="background-color: #C5CAE9">
+  <v-app id="inspire" >
     <v-content>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">

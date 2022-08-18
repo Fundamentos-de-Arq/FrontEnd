@@ -1,71 +1,62 @@
 <template>
-  <div>
+  <v-app>
 
-    <div class="container">
+    <!--      <div style="display:flex; justify-content:center; margin-bottom: 20px">-->
+    <!--        <v-card class="filters" max-width="800">-->
+    <!--          <filtercomponent/>-->
+    <!--          <v-card-actions class="justify-center">-->
+    <!--            <v-btn style="color:white; background-color: #FFC107" elevation="2" @click="getdata">Filter</v-btn>-->
+    <!--          </v-card-actions>-->
+    <!--        </v-card>-->
+    <!--      </div>-->
+    <v-container>
+      <v-row>
 
-<!--      <div style="display:flex; justify-content:center; margin-bottom: 20px">-->
-<!--        <v-card class="filters" max-width="800">-->
-<!--          <filtercomponent/>-->
-<!--          <v-card-actions class="justify-center">-->
-<!--            <v-btn style="color:white; background-color: #FFC107" elevation="2" @click="getdata">Filter</v-btn>-->
-<!--          </v-card-actions>-->
-<!--        </v-card>-->
-<!--      </div>-->
-
-      <v-container class="cards">
-        <v-row>
-          <div v-for="publication in publications" :key="publication.id">
-            <div v-for="pet in pets" :key="pet.id">
-              <div v-for="user in listUsers" :key="user.id"
-                   style="display: flex; justify-content: center; align-items: center">
-                <v-card
-                    v-if="
+        <v-col v-for="publication in publications" :key="publication.id" cols="4">
+          <div v-for="pet in pets" :key="pet.id">
+            <div v-for="user in listUsers" :key="user.id"
+                   v-show="
                         pet.id === publication.petId &&
                         user.id === publication.userId
                       "
-                    class="example-card" max-width="800">
+            >
+              <v-card
 
-                  <v-img
-                      :src="pet.urlToImage"
-                      class="white--text align-end"
-                      max-height="600"
-                      gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  class="example-card">
+
+                <v-img
+                    src="../assets/demo.jpg"
+                    class="white--text align-end"
+                    gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                >
+                  <v-card-title style="font-size: 2rem" v-text="pet.name"></v-card-title>
+                </v-img>
+
+                <v-card-actions >
+                  <v-btn
+                      @click="FormtoAdopt(pet.userId, publication.id)"
+                      v-if="publication.userId!==currentUser"
+                      class="mb-2 white--text red darken-1 "
                   >
-                    <v-card-title style="font-size: 2rem" v-text="pet.name"></v-card-title>
-                  </v-img>
-                  <v-card-text>
-                    <b style="color: #3F51B5">{{ pet.name }}</b> is a good <b style="color: #3F51B5">{{ pet.type }}</b>,
-                    this <b style="color: #3F51B5">{{ pet.type }}</b> is <b style="color: #3F51B5">{{ pet.gender }}</b>
-                    and <b style="color: #3F51B5">{{ pet.attention }}</b>. have
-                    <b style="color: #3F51B5">{{ pet.age }} years.</b>.
-                    His current caregiver says that "<b style="color: #3F51B5">{{ publication.comment }}</b>"
-                  </v-card-text>
+                    Adopt
+                  </v-btn>
 
-                  <v-card-actions class="publ_action">
-                    <v-btn
-                        style="color:white; background-color: #FFC107"
-                        @click="FormtoAdopt(pet.userId, publication.id)"
-                        v-if="publication.userId!==currentUser"
-                    >
-                      Adopt
-                    </v-btn>
+                  <v-btn
+                      @click="goToUserProfile(publication.userId)"
+                      class="mb-2 white--text red darken-1 "
+                  >
+                    Profile
+                  </v-btn>
+                </v-card-actions>
 
-                    <v-btn
-                        style="color:white; background-color: #FFC107"
-                        @click="goToUserProfile(publication.userId)"
-                    >
-                      Profile
-                    </v-btn>
-                  </v-card-actions>
+              </v-card>
 
-                </v-card>
-              </div>
             </div>
           </div>
-        </v-row>
-      </v-container>
+        </v-col>
+      </v-row>
 
-    </div>
+    </v-container>
 
     <div>
       <v-row justify="center">
@@ -106,7 +97,7 @@
     </div>
 
     <!--Final Formulario de publicacion-->
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -121,6 +112,7 @@ import NotificationService from "../core/services/notifications.service"
 export default {
   name: "viewAllPublications",
   data: () => ({
+
     publications: [],
     listUsers: [],
     listdistricts: [],
@@ -237,8 +229,7 @@ export default {
     this.getAllPets();
     this.getallUser();
   },
-  components: {
-  }
+  components: {}
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <v-app >
 
-      <app-bar></app-bar>
+      <app-bar v-show="$route.path!=='/'"></app-bar>
 
     <v-main >
       <v-container fluid >
