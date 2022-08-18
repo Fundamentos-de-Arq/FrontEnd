@@ -1,0 +1,18 @@
+   
+Feature: Como cliente quiero agregar una nueva publicación
+
+
+Scenario: Completar los datos del cliente para poner en adopción a su mascota.
+Given El cliente se encuentra en el apartado de la aplicación para poner en adopción.
+When El cliente llene todos los campos necesarios para hacer la publicación y la publica.
+Then La mascota es agregada a todas las publicaciones de la aplicación.
+
+Scenario: No completar sus datos para poner en adopcion a la mascota del cliente.
+Given El cliente se encuentra en el apartado de la aplicación para poner en adopción.
+When El cliente no llene todos los campos obligatorios 
+Then El cliente no puede realizar la publicación.
+
+Scenario: No tienes conexión a internet
+Given El cliente se encuentra en el apartado de la aplicación para poner en adopción.
+When El cliente llene todos los campos obligatorios para hacer la publicación.
+Then El cliente no puede realizar la publicación.

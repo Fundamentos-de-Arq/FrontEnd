@@ -1,0 +1,16 @@
+
+Como cliente
+Quiero ver todas las publicaciones en general
+para así elegir alguna en especial
+
+
+Scenario: Existen publicaciones en la base de datos
+Given El cliente se encuentra en la vista "Menú principal"
+When  El cliente de click en “Ver publicaciones”  
+Then Se obtendrán todas las publicaciones del cliente
+
+Scenario: No existen publicaciones en la base de datos
+Given El cliente se encuentra en la vista "Menú principal"
+When  El cliente de click en “Ver publicaciones”  
+Then Se mostrará un mensaje en consola "No existen datos"
+
