@@ -40,11 +40,7 @@
         <v-card-text>
           <v-container>
             <v-row>
-              <v-col
-                  cols="12"
-                  sm="6"
-                  md="4"
-              >
+              <v-col cols="12" sm="6" md="4">
                 <v-text-field
                     label="type"
                     v-model="tipo"
@@ -64,11 +60,7 @@
                     hint="example of helper text only on focus"
                 ></v-text-field>
               </v-col>
-              <v-col
-                  cols="12"
-                  sm="6"
-                  md="4"
-              >
+              <v-col cols="12" sm="6" md="4">
                 <v-text-field
                     label="race*"
                     v-model="race"
@@ -94,7 +86,6 @@
                     required
                 ></v-text-field>
               </v-col>
-
               <v-col cols="12">
                 <v-text-field
                     label="comment"
@@ -159,10 +150,10 @@
               sm="6"
               md="4"
           >
-            <div v-for="pet in pets" :key="pet.id" v-show='pet.name.includes(to_find) || to_find === ""'>
+            <div v-for="pet in pets" :key="pet.id" v-show='pet.name.includes(to_find) || to_find === "" '>
 
               <v-card
-                  v-if="pet.id===publication.petId"
+                  v-show="pet.id===publication.petId"
                   class="mx-auto"
                   max-width="344"
               >
@@ -333,14 +324,12 @@ export default {
     },
     async Save() {
       if (this.editActivate) {
-
         await PublicationsService.putPublication(this.currentPublicationId, {
           Comment: this.comment,
           PetId: this.currentPetId,
           DateTime: this.datetime,
           UserId: this.userId
         }).then(
-            this.retrievePublications,
             this.getPets,
             this.dialog = false,
             this.editActivate = false,
@@ -354,30 +343,31 @@ export default {
           userId: this.userId
         }).then(
             async response => {
-              await PetsService.putPet(this.currentPetId, {
-                type: this.tipo,
-                name: this.name,
-                attention: this.attention,
-                age: this.age,
-                race: this.race,
-                isAdopted: this.isAdopted,
-                userId: this.userId,
-                publicationId: await response.data.id,
-                isPublished: true,
-                gender: 'none',
-                urlToImage: this.urlToImage
-              }).then(
-                  await this.retrievePublications,
-                  this.getPets,
-              )
+              this.publicationId= await response.data.id;
             }
         )
 
-
+        await PetsService.putPet(this.currentPetId, {
+          type: this.tipo,
+          name: this.name,
+          attention: this.attention,
+          age: this.age,
+          race: this.race,
+          isAdopted: this.isAdopted,
+          userId: this.userId,
+          publicationId: this.publicationId,
+          isPublished: true,
+          gender: 'none',
+          urlToImage: this.urlToImage
+        }).then(
+            this.getPets,
+        )
         this.dialog = false
         this.editActivate = false
         this.defaultForm()
       }
+      await this.retrievePublications()
+
     },
     Close() {
       this.dialog = false;
@@ -386,8 +376,29 @@ export default {
     },
     async DeletePublication(id) {
       await PublicationsService.DeletePublication(id).then(
-          this.retrievePublications
+          async response=>{
+            await PetsService.getPetById(await response.data.petId).then(
+                async res=>{
+                  await PetsService.putPet(await response.data.petId, {
+                    type: await res.data.type,
+                    name: await res.data.name,
+                    attention: await res.data.attention,
+                    age: await res.data.age,
+                    race: await res.data.race,
+                    isAdopted: await res.data.isAdopted,
+                    userId: await res.data.userId,
+                    publicationId: await res.data.publicationId,
+                    isPublished: false,
+                    gender: 'none',
+                    urlToImage: await res.data.urlToImage
+                  })
+                }
+
+            )
+          }
       );
+      await this.retrievePublications()
+      await this.getPets()
     },
     filFormPubication(Pet) {
       this.tipo = Pet.type;
