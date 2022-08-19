@@ -25,7 +25,6 @@
                     class="white--text align-end"
                     @click="showPetInfo(user, publication, pet)"
                     max-height="250"
-
                 >
                   <v-card-title style="font-size: 2rem" v-text="pet.name"></v-card-title>
                 </v-img>
@@ -33,7 +32,7 @@
                 <v-card-actions>
                   <v-btn
                       @click="FormtoAdopt(pet.userId, publication.id)"
-                      v-if="publication.userId!==currentUser"
+                      v-show='publication.userId.toString()!== currentUser.toString()'
                       class="white--text red darken-1 "
                   >
                     Adopt
@@ -275,6 +274,7 @@ export default {
   name: "viewAllPublications",
   data: () => ({
 
+    show_btn: true,
     publications: [],
     card_pet_info: {
       user_id: 0,
@@ -302,7 +302,7 @@ export default {
     nameOfOwner: "",
     lastnameOfOwner: "",
     urlPerPublication: "",
-    currentUser: -1,
+    currentUser: localStorage.getItem("user"),
     currentPublication: -1
   }),
   methods: {
@@ -379,17 +379,14 @@ export default {
     getallUser() {
       UsersService.getAllUsers().then((response) => {
         this.listUsers = response.data;
-        console.log("this.listUsers")
-        console.log(this.listUsers)
         districtService.getAllDistricts().then((response) => {
           this.listdistricts = response.data;
-          console.log(this.listdistricts)
         });
       });
     },
   },
   mounted() {
-    this.currentUser = UsersService.getCurrentUser()
+    this.currentUser = localStorage.getItem("user")
     this.retrievePublications();
     this.getAllPets();
     this.getallUser();

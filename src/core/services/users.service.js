@@ -1,6 +1,6 @@
 import http from "./http-common"
 import axios from 'axios';
-const API_URL = 'https://localhost:5001/api/v1/users';
+const API_URL = 'https://webapp-220818223116.azurewebsites.net/api/v1/users';
 
 
 class UsersService {
@@ -18,7 +18,6 @@ class UsersService {
         return JSON.parse(localStorage.getItem('user')).id
     }
 
-
     currentUser=0;
 
     getAllUsers(){
@@ -34,7 +33,7 @@ class UsersService {
     }
 
     postUser(data){
-        return axios.post(`https://localhost:5001/api/v1/users/auth/sign-up`, data)
+        return axios.post(`https://webapp-220818223116.azurewebsites.net/api/v1/users/auth/sign-up`, data)
     }
 
 }
