@@ -11,11 +11,6 @@ const routes = [
     component: SignIn
   },
   {
-    path: '/SignIn',
-    name: 'SignIn',
-    component: SignIn
-  },
-  {
     path: '/home',
     name: 'home',
     component: Home
@@ -54,7 +49,13 @@ const routes = [
     component:()=>import ('../components/viewAllPublications')
   },
   {
-    path: '/myUserProfile',
+    path: '/Profile',
+    name: 'viewMyUserProfile',
+    component:()=>import ('../components/viewMyUserProfile')
+  },
+
+  {
+    path: '/profile/:id',
     name: 'viewMyUserProfile',
     component:()=>import ('../components/viewMyUserProfile')
   },

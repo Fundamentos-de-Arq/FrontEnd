@@ -183,7 +183,6 @@
 
 <script>
 import AddServices from "../core/services/ad.service"
-import UserService from "@/core/services/users.service";
 
 export default {
   name: "viewMyAds",
@@ -210,7 +209,7 @@ export default {
     editedIndex: -1,
     editedItem: {
       id: '',
-      userId: UserService.getCurrentUser(),
+      userId: localStorage.getItem("user"),
       dateTime: '',
       title: '',
       description: '',
@@ -220,7 +219,7 @@ export default {
     },
     defaultItem: {
       id: '',
-      userId: UserService.getCurrentUser(),
+      userId: localStorage.getItem("user"),
       dateTime: '',
       title: '',
       description: '',
@@ -251,7 +250,7 @@ export default {
 
   methods: {
     getAdds(){
-      AddServices.getAllByUserId(UserService.getCurrentUser()).then(
+      AddServices.getAllByUserId(localStorage.getItem("user")).then(
           response =>{
             this.adds=response.data;
           }
@@ -301,7 +300,7 @@ export default {
 
         AddServices.UpdateAd(this.editedItem.id,{
           id: this.editedItem.id,
-          userId: UserService.currentUser,
+          userId: localStorage.getItem("user"),
           dateTime: this.editedItem.dateTime,
           title: this.editedItem.title,
           description: this.editedItem.description,

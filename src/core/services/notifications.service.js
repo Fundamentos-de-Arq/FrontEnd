@@ -21,7 +21,7 @@ class NotificationService {
     }
     deleteNotification(id){
         //return http.delete(`//adoptionRequests${id}`);
-        return http.delete(API_URL+`/userIdAt=${id}`);
+        return http.delete(`/adoptionsrequests/${id}`);
     }
     getUsersById(index){
         //return http.get('/users/'+ index);

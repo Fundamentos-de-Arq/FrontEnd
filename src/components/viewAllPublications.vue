@@ -306,24 +306,17 @@ export default {
     currentPublication: -1
   }),
   methods: {
-    sendAdoption(message) {
-      NotificationService.postNotification({
+    async sendAdoption(message) {
+      await NotificationService.postNotification({
         message: message,
         status: "pending",
-        userIdFrom: UsersService.getCurrentUser(),
+        userIdFrom: localStorage.getItem("user"),
         userIdAt: this.userId_publication,
         publicationId: this.currentPublication
       })
     },
     getDisplayPublications(publication) {
       return {
-        /*
-          "comment": "is lovely",
-      "petId": 9,
-      "datetime": "00/00/00",
-      "userId": 0,
-      "id": 6
-         */
         id: publication.id,
         comment: publication.comment,
       };
@@ -334,50 +327,31 @@ export default {
       this.getFullNameOfOwner();
       this.dialog = true;
     },
-    getUserIdbyPublication() {
-      return this.userId_publication;
-    },
     Close() {
       this.dialog = false;
       this.editActivate = false;
       this.defaultForm();
     },
-    getAllPets() {
-      PetsService.getAllpets().then((response) => {
-        this.pets = response.data;
-        console.log(this.pets);
+    async getAllPets() {
+      await PetsService.getAllpets().then(async response => {
+        this.pets = await response.data;
       });
     },
-    showImageUser(id) {
-      UsersService.getUsersById(id).then((res) => {
-        this.urlPerPublication = res.data.urlToImageProfile;
-      });
-      return this.urlPerPublication;
-    },
-    getFullNameOfOwner() {
-      UsersService.getUsersById(this.userId_publication).then((response) => {
-        this.nameOfOwner = response.data.name;
-        this.lastnameOfOwner = response.data.lastName;
-        console.log(this.nameOfOwner);
+    async getFullNameOfOwner() {
+      await UsersService.getUsersById(this.userId_publication).then(async response => {
+        this.nameOfOwner = await response.data.name;
+        this.lastnameOfOwner = await response.data.lastName;
       });
     },
     goToUserProfile(id) {
       UsersService.storageUser = id;
-      console.log(UsersService.currentUser)
-      this.$router.push("/myUserProfile");
+      this.$router.push("/profile/"+id);
     },
     retrievePublications() {
       PublicationsService.getAllPublications()
           .then((response) => {
             this.publications = response.data;
-            console.log(this.publications[0].comment);
           })
-          .catch((e) => {
-            console.log(e);
-          });
-    },
-    fillFormAdoptionRequest() {
-      this.$router.push("/editPublication");
     },
     DeletePublication(id) {
       CreatepublicationServices.DeletePublication(id).then(

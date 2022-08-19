@@ -7,6 +7,11 @@ class PetsService {
   getPets(userId) {
     return axios.get(`https://localhost:5001/api/v1/pets/userId=${userId}`);
   }
+  getPetById(id){
+    return axios.get(`https://localhost:5001/api/v1/pets/${id}`)
+  }
+
+
   getAllpets() {
     return axios.get(`https://localhost:5001/api/v1/pets`);
   }

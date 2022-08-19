@@ -10,9 +10,13 @@
     <v-spacer></v-spacer>
 
     <v-btn class="text-white" plain @click="goToAllPublications">Pets</v-btn>
+    <v-btn class="text-white" plain @click="goToAds">Ads</v-btn>
     <v-btn class="text-white" plain @click="seeDiscountedAdds">Promotions</v-btn>
     <v-spacer></v-spacer>
 
+    <v-btn class="text-white" icon @click="goToMyAds">
+      <v-icon >mdi-advertisements</v-icon>
+    </v-btn>
     <v-btn class="text-white" icon @click="goToMyPublications">
       <v-icon >mdi-newspaper-variant</v-icon>
     </v-btn>
@@ -45,21 +49,25 @@ export default {
     },
     seeMyUserProfile(){
       UsersService.currentUser = 0;
-      this.$router.push('/myUserProfile');
+      this.$router.push('/profile');
     },
     goToCreateAd(){
+      this.$router.push('/createAD')
+    },
+    goToAds(){
       this.$router.push('/createAD')
     },
     seeDiscountedAdds(){
       this.$router.push('/discountedAdds')
 
     },
-    seeMyAds(){
-      this.$router.push('/myAds')
-    },
     seeMyNotifications(){
       this.$router.push('/myNotifications')
+    },
+    goToMyAds(){
+      this.$router.push('/myAds')
     }
+
   },
 
 }

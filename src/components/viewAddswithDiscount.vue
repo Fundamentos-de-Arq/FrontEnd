@@ -115,19 +115,13 @@ export default {
   components: { },
   methods: {
 
-   retrieveDiscountedAdds(){
-     UsersService.getUsersById(UsersService.getCurrentUser()).then(response=>{
-       this.phoneNumber=response.data.phone;
-       console.log(this.phoneNumber);
+   async retrieveDiscountedAdds(){
+     await UsersService.getUsersById(localStorage.getItem("user")).then(async response=>{
+       this.phoneNumber= await response.data.phone;
      });
-     AddServices.getDiscountedAdds().then(result=>{
-
-       this.listAdds=result.data;
-       console.log(result.data);
-
-     }).catch(e => {
-           console.log(e);
-         })
+     await AddServices.getDiscountedAdds().then(async response =>{
+       this.listAdds= await response.data;
+     })
    }
   },
   mounted () {

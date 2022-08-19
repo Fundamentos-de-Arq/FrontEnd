@@ -207,7 +207,6 @@
                   Required Attention: {{ pet.attention }} <br/>
                   Race: {{ pet.race }} <br/>
                   Age: {{ pet.age }} <br/>
-                  Image: {{ pet.urlToImage }} <br/>
                   Is Adopted?: {{ pet.isAdopted }}
                 </v-card-text>
 

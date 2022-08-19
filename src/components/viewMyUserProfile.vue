@@ -76,7 +76,7 @@
                 readonly :value=this.password>
             </v-text-field>
           </v-col>
-          <v-card-actions  v-show="this.storageUser===this.tempUser" >
+          <v-card-actions   >
             <v-btn style="color:white; background-color: #FFC107" @click="onEdit">
               Edit Information
             </v-btn>
@@ -240,21 +240,76 @@ export default {
     async retrieveUsers() {
       this.storageUser = UsersService.storageUser;
       this.tempUser = UsersService.getCurrentUser()
-      await UsersService.getUsersById(localStorage.getItem("user"))
-        .then(async response => {
-          this.type = await response.data.type;
-          this.user = await response.data.userNick;
-          this.email = await response.data.email;
-          this.password = '******';
-          this.ruc = await response.data.ruc;
-          this.dni = await response.data.dni;
-          this.phone = await response.data.phone;
-          this.name = await response.data.name;
-          this.lastName = await response.data.lastName;
-          this.urlToImageBackground = await response.data.urlToImageBackground;
-          this.urlToImageProfile = await response.data.urlToImageProfile;
-          this.currentUser = UsersService.currentUser;
-        });
+      if(this.$route.params.id){
+        console.log("VALIDO")
+        await UsersService.getUsersById(this.$route.params.id)
+              .then(async response => {
+                this.type = await response.data.type;
+                this.user = await response.data.userNick;
+                this.email = await response.data.email;
+                this.password = '******';
+                this.ruc = await response.data.ruc;
+                this.dni = await response.data.dni;
+                this.phone = await response.data.phone;
+                this.name = await response.data.name;
+                this.lastName = await response.data.lastName;
+                this.urlToImageBackground = await response.data.urlToImageBackground;
+                this.urlToImageProfile = await response.data.urlToImageProfile;
+                this.currentUser = UsersService.currentUser;
+              });
+      }
+      else {
+        console.log("INVALIDO")
+        await UsersService.getUsersById(localStorage.getItem("user"))
+              .then(async response => {
+                this.type = await response.data.type;
+                this.user = await response.data.userNick;
+                this.email = await response.data.email;
+                this.password = '******';
+                this.ruc = await response.data.ruc;
+                this.dni = await response.data.dni;
+                this.phone = await response.data.phone;
+                this.name = await response.data.name;
+                this.lastName = await response.data.lastName;
+                this.urlToImageBackground = await response.data.urlToImageBackground;
+                this.urlToImageProfile = await response.data.urlToImageProfile;
+                this.currentUser = UsersService.currentUser;
+              });
+      }
+
+      // if(this.$route.params)
+      //   await UsersService.getUsersById(this.$route.params.id)
+      //       .then(async response => {
+      //         this.type = await response.data.type;
+      //         this.user = await response.data.userNick;
+      //         this.email = await response.data.email;
+      //         this.password = '******';
+      //         this.ruc = await response.data.ruc;
+      //         this.dni = await response.data.dni;
+      //         this.phone = await response.data.phone;
+      //         this.name = await response.data.name;
+      //         this.lastName = await response.data.lastName;
+      //         this.urlToImageBackground = await response.data.urlToImageBackground;
+      //         this.urlToImageProfile = await response.data.urlToImageProfile;
+      //         this.currentUser = UsersService.currentUser;
+      //       });
+      // else{
+      //   await UsersService.getUsersById(localStorage.getItem("user"))
+      //       .then(async response => {
+      //         this.type = await response.data.type;
+      //         this.user = await response.data.userNick;
+      //         this.email = await response.data.email;
+      //         this.password = '******';
+      //         this.ruc = await response.data.ruc;
+      //         this.dni = await response.data.dni;
+      //         this.phone = await response.data.phone;
+      //         this.name = await response.data.name;
+      //         this.lastName = await response.data.lastName;
+      //         this.urlToImageBackground = await response.data.urlToImageBackground;
+      //         this.urlToImageProfile = await response.data.urlToImageProfile;
+      //         this.currentUser = UsersService.currentUser;
+      //       });
+      // }
     },
     onEdit() {
       this._user = this.user;
