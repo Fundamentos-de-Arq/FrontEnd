@@ -127,8 +127,8 @@
       </v-card>
     </v-dialog>
 
-    <v-responsive >
-      <v-container >
+    <v-responsive>
+      <v-container>
         <v-row>
           <v-col cols="9">
             <v-text-field label="Search..."
@@ -220,8 +220,7 @@
                       Required Attention: {{ pet.attention }} <br/>
                       Race: {{ pet.race }} <br/>
                       Age: {{ pet.age }} <br/>
-                      Image: {{ pet.urlToImage }} <br/>
-                      Is Adopted?: {{ pet.isAdopted }}
+
                     </v-card-text>
 
                   </div>
@@ -261,9 +260,11 @@ export default {
     age: '',
     urlToImage: '',
     isAdopted: '',
+    isPublished: '',
     userId: '',
     comment: '',
     datetime: '00/00/00',
+    publicationId: 0,
     pets: [],
     truevalue: true,
     _id: 0,
@@ -288,8 +289,6 @@ export default {
       await PetsService.getPets(localStorage.getItem("user")).then(
           async response => {
             this.pets = await response.data;
-            console.log("OBTENIENDO PETS")
-            console.log(this.pets)
           }
       )
     },
@@ -325,6 +324,7 @@ export default {
       this.age = Pet.age;
       this.urlToImage = Pet.urlToImage;
       this.isAdopted = Pet.isAdopted;
+      this.isPublished = Pet.isPublished;
       this.userId = Pet.userId;
       this.comment = Publication.comment;
       this.datetime = "12/12/12";
@@ -353,26 +353,30 @@ export default {
           datetime: this.datetime,
           userId: this.userId
         }).then(
-            this.retrievePublications
+            async response => {
+              await PetsService.putPet(this.currentPetId, {
+                type: this.tipo,
+                name: this.name,
+                attention: this.attention,
+                age: this.age,
+                race: this.race,
+                isAdopted: this.isAdopted,
+                userId: this.userId,
+                publicationId: await response.data.id,
+                isPublished: true,
+                gender: 'none',
+                urlToImage: this.urlToImage
+              }).then(
+                  await this.retrievePublications,
+                  this.getPets,
+              )
+            }
         )
 
-        await PetsService.putPet(this.currentPetId, {
-          id: this.currentPetId,
-          type: this.tipo,
-          name: this.name,
-          attention: this.attention,
-          race: this.race,
-          age: this.age,
-          urlToImage: this.urlToImage,
-          isAdopted: this.isAdopted,
-          isPublished: true,
-          userId: this.userId
-        }).then(
-            this.getPets,
-        )
-        this.dialog = false,
-            this.editActivate = false,
-            this.defaultForm()
+
+        this.dialog = false
+        this.editActivate = false
+        this.defaultForm()
       }
     },
     Close() {
@@ -394,6 +398,7 @@ export default {
       this.urlToImage = Pet.urlToImage;
       this.isAdopted = Pet.isAdopted;
       this.userId = Pet.userId;
+      this.isPublished = true;
       this.datetime = '00/00/00';
       this.currentPetId = Pet.id;
       this.retrievePublications();

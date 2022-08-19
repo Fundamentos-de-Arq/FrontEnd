@@ -21,6 +21,7 @@ class PetsService {
   postPet(data) {
     return axios.post(`https://webapp-220818223116.azurewebsites.net/api/v1/pets`, data);
   }
+
   putPet(id, data) {
     return axios.put(`https://webapp-220818223116.azurewebsites.net/api/v1/pets/${id}`, data);
   }
