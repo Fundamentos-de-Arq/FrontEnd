@@ -1,13 +1,15 @@
-import http from "./http-common"
-import axios from 'axios';
-const API_URL = 'https://webapp-220818223116.azurewebsites.net/api/v1/users';
+import http from "./http-auth"
+// import axios from 'axios';
+// const API_URL = 'https://webapp-220818223116.azurewebsites.net/api/v1/users';
+
 
 
 class UsersService {
+
     storageUser = -1;
 
     signInService(user, password){
-        return http.post(`users/auth/sign-in`, {UserNick:user, Pass:password})
+        return http.post(`/users/auth/sign-in`, {UserNick:user, Pass:password})
     }
 
     userService(){
@@ -21,19 +23,19 @@ class UsersService {
     currentUser=0;
 
     getAllUsers(){
-        return http.get(API_URL);
+        return http.get('/users');
     }
 
     async getUsersById(index){
-        return await http.get(`users/${index}`)
+        return await http.get(`/users/${index}`)
     }
 
     async updateUserById(id,data){
-        return await http.put(`users/${id}`,data);
+        return await http.put(`/users/${id}`,data);
     }
 
     postUser(data){
-        return axios.post(`https://webapp-220818223116.azurewebsites.net/api/v1/users/auth/sign-up`, data)
+        return http.post(`/users/auth/sign-up`, data)
     }
 
 }

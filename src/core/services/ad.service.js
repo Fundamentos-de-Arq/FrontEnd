@@ -1,24 +1,25 @@
-import axios from "axios";
+// import axios from "axios";
+import http from "./http-common"
 
 class AddServices {
     postNewAd(data){
-        return axios.post("https://webapp-220818223116.azurewebsites.net/api/v1/Advertisements",data);
+        return http.post("/Advertisements",data);
     }
     getAllAds(){
-        return axios.get("https://webapp-220818223116.azurewebsites.net/api/v1/Advertisements/");
+        return http.get("/Advertisements/");
     }
     getDiscountedAdds(){
-        return axios.get("https://webapp-220818223116.azurewebsites.net/api/v1/Advertisements/promoted=true")
+        return http.get("/Advertisements/promoted=true")
     }
     UpdateAd(id,data){
-        return axios.put(`https://webapp-220818223116.azurewebsites.net/api/v1/Advertisements/${id}`,data);
+        return http.put(`/Advertisements/${id}`,data);
     }
     DeleteAd(id)
     {
-        return axios.delete(`https://webapp-220818223116.azurewebsites.net/api/v1/Advertisements/${id}`);
+        return http.delete(`/Advertisements/${id}`);
     }
     getAllByUserId(id){
-        return axios.get(`https://webapp-220818223116.azurewebsites.net/api/v1/users/${id}/Advertisements`)
+        return http.get(`/users/${id}/Advertisements`)
     }
 }
 

@@ -1,25 +1,26 @@
-import axios from "axios";
+// import axios from "axios";
+import http from "./http-common"
 
 
 class PublicationsService {
     postNewPublication(data){
-        return axios.post("https://webapp-220818223116.azurewebsites.net/api/v1/publications",data);
+        return http.post("/publications",data);
     }
     getAllPublications(){
-        return axios.get("https://webapp-220818223116.azurewebsites.net/api/v1/publications/");
+        return http.get("/publications/");
     }
     getUserPublications(id){
-        return axios.get(`https://webapp-220818223116.azurewebsites.net/api/v1/users/${id}/publications`);
+        return http.get(`/users/${id}/publications`);
     }
     getPublicationById(id){
-        return axios.get(`https://webapp-220818223116.azurewebsites.net/api/v1/publications/${id}`);
+        return http.get(`/publications/${id}`);
     }
     putPublication(id,data){
-        return axios.put(`https://webapp-220818223116.azurewebsites.net/api/v1/publications/${id}`,data);
+        return http.put(`/publications/${id}`,data);
     }
     DeletePublication(id)
     {
-        return axios.delete(`https://webapp-220818223116.azurewebsites.net/api/v1/publications/${id}`);
+        return http.delete(`/publications/${id}`);
     }   
 }
 

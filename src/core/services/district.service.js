@@ -1,13 +1,13 @@
 import http from "./http-common"
-import axios from "axios";
+// import axios from "axios";
 
 class districtService
 {
-    endpoint="api/v1/districts"
+    // endpoint="api/v1/districts"
     datafilter
     getAllDistricts()
     {
-        return axios.get(`https://webapp-220818223116.azurewebsites.net/api/v1/district`)
+        return http.get(`/district`)
     }
 
     getByDistrict(data){
@@ -17,7 +17,7 @@ class districtService
             this.getAllDistricts()
         }else
         {
-            return http.get(`/${this.endpoint}?district=${data}`)
+            return http.get(`/districts?district=${data}`)
         }
     }
     getdistrictfilter() {
