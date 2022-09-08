@@ -1,6 +1,6 @@
 import http from "./http-common"
 import axios from 'axios';
-const API_URL = 'https://webapp-220818223116.azurewebsites.net/api/v1/users';
+const API_URL = 'https://webapp-220907215919.azurewebsites.net/api/v1/users';
 
 
 class UsersService {
@@ -33,7 +33,7 @@ class UsersService {
     }
 
     postUser(data){
-        return axios.post(`https://webapp-220818223116.azurewebsites.net/api/v1/users/auth/sign-up`, data)
+        return axios.post(`https://webapp-220907215919.azurewebsites.net/api/v1/users/auth/sign-up`, data)
     }
 
 }

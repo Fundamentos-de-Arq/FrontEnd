@@ -7,7 +7,7 @@ class districtService
     datafilter
     getAllDistricts()
     {
-        return axios.get(`https://webapp-220818223116.azurewebsites.net/api/v1/district`)
+        return axios.get(`https://webapp-220907215919.azurewebsites.net/api/v1/district`)
     }
 
     getByDistrict(data){
