@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from "@/views/Home";
 import SignIn from "@/components/SignIn";
 Vue.use(VueRouter)
 
@@ -9,11 +8,6 @@ const routes = [
     path: '/',
     name: 'SignIn',
     component: SignIn
-  },
-  {
-    path: '/home',
-    name: 'home',
-    component: Home
   },
   {
     path: '/createpublication',

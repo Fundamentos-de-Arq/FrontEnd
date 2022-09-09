@@ -202,6 +202,7 @@
 
 
                 <v-card-text overline style="text-align:left">
+                  UserId: {{ pet.userId }} <br/>
                   Name: {{ pet.name }} <br/>
                   Type: {{ pet.type }} <br/>
                   Required Attention: {{ pet.attention }} <br/>
@@ -306,6 +307,7 @@ export default {
       await PetsService.getPets(localStorage.getItem('user')).then(
           async response => {
             this.pets = await response.data;
+            console.log("My Id is: "+localStorage.getItem("user"))
           }
       )
     },

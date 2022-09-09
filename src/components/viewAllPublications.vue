@@ -189,53 +189,6 @@
                       </v-card-subtitle>
                     </v-row>
 
-                    <!--                    <v-row>-->
-                    <!--                      <v-col>-->
-                    <!--                        <v-list>-->
-
-                    <!--                          <v-list-item>-->
-
-                    <!--                            <v-list-item-icon>-->
-                    <!--                              <v-icon-->
-                    <!--                                  large-->
-                    <!--                                  color="black"-->
-                    <!--                              >-->
-                    <!--                                mdi-gender-male-female-->
-                    <!--                              </v-icon>-->
-                    <!--                            </v-list-item-icon>-->
-                    <!--                            <v-list-item-content>-->
-                    <!--                              <v-list-item-title>{{card_pet_info.pet_gender}}</v-list-item-title>-->
-                    <!--                            </v-list-item-content>-->
-                    <!--                          </v-list-item>-->
-
-
-                    <!--                        </v-list>-->
-
-                    <!--                      </v-col>-->
-                    <!--                      <v-col>-->
-                    <!--                        <v-card-text>-->
-                    <!--                          <v-icon-->
-                    <!--                              large-->
-                    <!--                              color="black"-->
-                    <!--                          >-->
-                    <!--                            mdi-cellphone-->
-                    <!--                          </v-icon>-->
-                    <!--                          {{ card_pet_info.user_phone }}-->
-                    <!--                        </v-card-text>-->
-
-                    <!--                      </v-col>-->
-                    <!--                      <v-col>-->
-                    <!--                        <v-card-text>-->
-                    <!--                          <v-icon-->
-                    <!--                              large-->
-                    <!--                              color="black"-->
-                    <!--                          >-->
-                    <!--                            mdi-domain-->
-                    <!--                          </v-icon>-->
-                    <!--                          NULL-->
-                    <!--                        </v-card-text>-->
-                    <!--                      </v-col>-->
-                    <!--                    </v-row>-->
                   </v-container>
                 </v-card>
               </v-col>
@@ -255,7 +208,6 @@ import CreatepublicationServices from "../core/services/createpublication.servic
 import PublicationsService from "../core/services/publications.service.js";
 import PetsService from "@/core/services/pets.service";
 import UsersService from "../core/services/users.service";
-// import filtergeneral from "../components/filter.vue";
 import districtService from "../core/services/district.service";
 import NotificationService from "../core/services/notifications.service"
 

@@ -1,37 +1,19 @@
 import http from "./http-common"
-import UsersService from "./users.service"
-import axios from "axios";
-const API_URL = 'https://webapp-220907215919.azurewebsites.net/api/v1/adoptionsrequests';
 class NotificationService {
 
-
     getAllUserAtNotifications(id){
-        //return http.get(`/adoptionRequests?userIdAt=${UsersService.currentUser}`);
-        return axios.get(`https://webapp-220907215919.azurewebsites.net/api/v1/adoptionsrequests/userIdAt=${id}`);
+        console.log(id)
+        return http.get(`/adoptionsrequests/userIdAt=${id}`);
     }
 
     postNotification(data){
-        //return http.get(`/adoptionRequests?userIdAt=${UsersService.currentUser}`);
-        return axios.post(`https://webapp-220907215919.azurewebsites.net/api/v1/adoptionsrequests`, data);
+        return http.post(`/adoptionsrequests`, data);
     }
 
-    getAllUserFromNotifications(){
-        //return http.get(`/adoptionRequests?userIdFrom=${UsersService.currentUser}`);
-        return http.get(API_URL+`/userIdAt=${UsersService.currentUser}`);
-    }
     deleteNotification(id){
         //return http.delete(`//adoptionRequests${id}`);
         return http.delete(`/adoptionsrequests/${id}`);
     }
-    getUsersById(index){
-        //return http.get('/users/'+ index);
-        return http.get(API_URL+`/userIdFrom=`+index);
-    }
-    updateNotification(id,data){
-        return axios.put(`https://webapp-220907215919.azurewebsites.net/api/v1/adoptionsrequests/${id}`,data);
-
-    }
-
 }
 
 export default new NotificationService();

@@ -144,7 +144,7 @@
               <v-btn class="white--text red darken-1 " @click="goToUserProfile(card_full_notification_interface.user_from_id)">
                 Profile
               </v-btn>
-              <v-btn class="white--text red darken-1 " @click="acceptRequest(card_full_notification_interface.notification_id, card_full_notification_interface.publication_id, card_full_notification_interface.pet_id)">
+              <v-btn class="white--text red darken-1 " @click="acceptRequest(card_full_notification_interface.user_from_id, card_full_notification_interface.notification_id, card_full_notification_interface.publication_id, card_full_notification_interface.pet_id)">
                 Accept
               </v-btn>
               <v-btn class="white--text red darken-1 " @click="declineRequest(card_full_notification_interface.notification_id)">
@@ -258,10 +258,10 @@ export default {
           async response => {
             this.notifications = await response.data;
           });
-      await NotificationService.getAllUserFromNotifications().then(
-          async response => {
-            this.notifications = this.notifications.concat(await response.data)
-          });
+      // await NotificationService.getAllUserFromNotifications().then(
+      //     async response => {
+      //       this.notifications = this.notifications.concat(await response.data)
+      //     });
       await UsersService.getAllUsers().then(
           async response => {
             this.users = await response.data;
@@ -314,26 +314,29 @@ export default {
     goToUserProfile(id){
       this.$router.push("/profile/"+id)
     },
-    async acceptRequest(notification_id, publication_id, pet_id){
+    async acceptRequest(user_from_id, notification_id, publication_id, pet_id){
+
       await NotificationService.deleteNotification(notification_id);
+
       await this.retrieveNotifications()
+
       await PublicationsService.DeletePublication(publication_id)
+
       await PetsService.getPetById(pet_id).then(
           async response=>{
             this.pet = await response.data;
           }
       )
-      await PetsService.putPet(pet_id, {
+      await PetsService.putPet(this.pet.id, {
         type: this.pet.type,
         name: this.pet.name,
         attention: this.pet.attention,
         age: this.pet.age,
         race: this.pet.race,
         isAdopted: true,
-        userId: this.pet.userId,
-        publicationId: this.pet.publicationId,
+        userId: user_from_id,
         isPublished: this.pet.isPublished,
-        gender: this.pet.gender,
+        gender: "string",
         urlToImage: this.pet.urlToImage,
       })
     },
@@ -343,15 +346,6 @@ export default {
       await this.retrieveNotifications()
     },
 
-    addData(datos) {
-      NotificationService.create(datos)
-          .then(response => {
-            console.log(response)
-
-          }).catch(e => {
-        console.log(e)
-      })
-    },
     editItem(item) {
       this.editedIndex = this.notifications.indexOf(item);
       this.editedItem = Object.assign({}, item);
@@ -396,9 +390,6 @@ export default {
       }
       this.close();
     },
-  },
-  created() {
-    this.initialize;
   },
   mounted() {
     this.retrieveNotifications();

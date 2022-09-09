@@ -1,57 +1,50 @@
-import axios from "axios";
+import http from "./http-common"
+
 
 
 class PetsService {
-  datafilter;
 
   getPets(userId) {
-    return axios.get(`https://webapp-220907215919.azurewebsites.net/api/v1/pets/userId=${userId}`);
+    return http.get(`/pets/userId=${userId}`);
   }
   getPetById(id){
-    return axios.get(`https://webapp-220907215919.azurewebsites.net/api/v1/pets/${id}`)
+    return http.get(`/pets/${id}`)
   }
-
 
   getAllpets() {
-    return axios.get(`https://webapp-220907215919.azurewebsites.net/api/v1/pets`);
+    return http.get(`/pets`);
   }
   deletePet(petId) {
-    return axios.delete(`https://webapp-220907215919.azurewebsites.net/api/v1/pets/${petId}`);
+    return http.delete(`/pets/${petId}`);
   }
   postPet(data) {
-    return axios.post(`https://webapp-220907215919.azurewebsites.net/api/v1/pets`, data);
+    return http.post(`/pets`, data);
   }
 
   putPet(id, data) {
-    return axios.put(`https://webapp-220907215919.azurewebsites.net/api/v1/pets/${id}`, data);
+    return http.put(`/pets/${id}`, data);
   }
 
   filterPet(typeSearch, genderSearch, requireAtention) {
     if (genderSearch === undefined && requireAtention === undefined) {
-      return axios.get(`https://webapp-220907215919.azurewebsites.net/api/v1/pets/type=${typeSearch}`);
+      return http.get(`/pets/type=${typeSearch}`);
     } else if (typeSearch === undefined && genderSearch === undefined) {
-      return axios.get(`https://webapp-220907215919.azurewebsites.net/api/v1/pets/attention=${requireAtention}`);
+      return http.get(`/pets/attention=${requireAtention}`);
     } else if (typeSearch === undefined && requireAtention === undefined) {
-      return axios.get(`https://webapp-220907215919.azurewebsites.net/api/v1/pets/gender=${genderSearch}`);
+      return http.get(`/pets/gender=${genderSearch}`);
     } else if (typeSearch === undefined) {
-      return axios.get(`https://webapp-220907215919.azurewebsites.net/api/v1/pets/gender=${genderSearch}&attention=${requireAtention}`);
+      return http.get(`/pets/gender=${genderSearch}&attention=${requireAtention}`);
     } else if (genderSearch === undefined) {
-      return axios.get(`https://webapp-220907215919.azurewebsites.net/api/v1/pets/type=${typeSearch}&attention=${requireAtention}`);
+      return http.get(`/pets/type=${typeSearch}&attention=${requireAtention}`);
     } else if (requireAtention === undefined) {
-      return axios.get(`https://webapp-220907215919.azurewebsites.net/api/v1/pets/type=${typeSearch}&gender=${genderSearch}`);
+      return http.get(`/pets/type=${typeSearch}&gender=${genderSearch}`);
     } else {
-      return axios.get(
-          `https://webapp-220907215919.azurewebsites.net/api/v1/pets/type=${typeSearch}&gender=${genderSearch}&attention=${requireAtention}`
+      return http.get(
+          `/pets/type=${typeSearch}&gender=${genderSearch}&attention=${requireAtention}`
       );
     }
   }
-  getdatafilter() {
-    return this.datafilter;
-  }
-  setdatafilter(data) {
-    this.datafilter = data;
-    //change
-  }
+
 }
 
 export default new PetsService();
