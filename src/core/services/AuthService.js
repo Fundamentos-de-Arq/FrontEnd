@@ -1,7 +1,7 @@
-import axios from 'axios';
+
 import UsersService from './users.service'
 import http from "@/core/services/http-common";
-const API_URL = 'https://localhost:5001/api/v1/users';
+const API_URL = 'https://webapp-220910205215.azurewebsites.net/api/v1/users';
 class AuthService {
     login(user) {
         return http.post(API_URL +'auth/sign-in', {
