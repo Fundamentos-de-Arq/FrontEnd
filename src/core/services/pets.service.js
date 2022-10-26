@@ -1,8 +1,8 @@
+
 import http from "./http-common"
 
-
-
 class PetsService {
+  datafilter;
 
   getPets(userId) {
     return http.get(`/pets/userId=${userId}`);
@@ -10,6 +10,7 @@ class PetsService {
   getPetById(id){
     return http.get(`/pets/${id}`)
   }
+
 
   getAllpets() {
     return http.get(`/pets`);
@@ -45,6 +46,11 @@ class PetsService {
     }
   }
 
+  setdatafilter(data) {
+    this.datafilter = data;
+    //change
+  }
 }
 
 export default new PetsService();
+

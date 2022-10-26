@@ -1,4 +1,6 @@
+// import axios from "axios";
 import http from "./http-common"
+
 
 class PublicationsService {
     postNewPublication(data){

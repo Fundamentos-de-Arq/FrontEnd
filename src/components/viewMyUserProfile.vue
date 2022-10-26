@@ -76,11 +76,14 @@
                 readonly :value=this.password>
             </v-text-field>
           </v-col>
-          <v-card-actions   >
+          <v-card-actions>
             <v-btn style="color:white; background-color: #FFC107" @click="onEdit">
               Edit Information
             </v-btn>
 
+            <v-btn v-if="this.$route.params.id!==this.userId" class="white--text red" @click="reportUser">
+              Report User
+            </v-btn>
           </v-card-actions>
         </v-row>
       </v-container>
@@ -206,9 +209,11 @@
 
 <script>
 import UsersService from "../core/services/users.service";
+import reportService from "@/core/services/report.service";
 export default {
   name: "viewMyUserProfile",
   data: () => ({
+    userId: localStorage.getItem("user"),
     urlToImageBackground: "",
     urlToImageProfile: "",
     type: "",
@@ -323,6 +328,15 @@ export default {
       this._urlToUserProfileImage = this.urlToImageProfile;
 
       this.dialog = true;
+    },
+
+    reportUser(){
+      reportService.postAsync({
+        userId: this.$route.params.id,
+        type: "Reported",
+        description: "description",
+        dateTime: "datetime"
+      })
     },
     Close() {
       this.dialog = false;

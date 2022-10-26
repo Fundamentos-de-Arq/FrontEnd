@@ -1,10 +1,9 @@
-
+// import axios from 'axios';
+import http from "./http-common"
 import UsersService from './users.service'
-import http from "@/core/services/http-common";
-const API_URL = 'https://webapp-220910205215.azurewebsites.net/api/v1/users';
 class AuthService {
     login(user) {
-        return http.post(API_URL +'auth/sign-in', {
+        return http.post('/users/auth/sign-in', {
             username: user.username,
             password: user.password
         })
@@ -21,7 +20,7 @@ class AuthService {
         localStorage.removeItem('user');
     }
     register(user) {
-        return http.post(API_URL + 'auth/sign-up', {
+        return http.post('/users/auth/sign-up', {
             firstName: user.firstName,
             lastName: user.lastName,
             username: user.username,

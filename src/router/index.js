@@ -72,6 +72,11 @@ const routes = [
     path: '/myNotifications',
     name: 'myNotifications',
     component:()=>import ('../components/viewNotifications')
+  },
+  {
+    path: '/subscriptions',
+    name: 'mySubrscriptions',
+    component:()=>import ('../components/Subscription')
   }
 ]
 

@@ -1,6 +1,8 @@
-import http from "@/core/services/http-common";
+// import axios from "axios";
+import http from "./http-common"
 
 class AddServices {
+
     postNewAd(data){
         return http.post("/Advertisements",data);
     }

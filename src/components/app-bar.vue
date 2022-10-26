@@ -12,6 +12,7 @@
     <v-btn class="text-white" plain @click="goToAllPublications">Pets</v-btn>
     <v-btn class="text-white" plain @click="goToAds">Ads</v-btn>
     <v-btn class="text-white" plain @click="seeDiscountedAdds">Promotions</v-btn>
+    <v-btn class="text-white" plain @click="seeSubscriptions">Subscriptions</v-btn>
     <v-spacer></v-spacer>
 
     <v-btn class="text-white" icon @click="goToMyAds">
@@ -59,7 +60,9 @@ export default {
     },
     seeDiscountedAdds(){
       this.$router.push('/discountedAdds')
-
+    },
+    seeSubscriptions(){
+      this.$router.push('/subscriptions')
     },
     seeMyNotifications(){
       this.$router.push('/myNotifications')
